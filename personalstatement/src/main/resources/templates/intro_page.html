@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>자기소개 페이지</title>
+
+    <style>
+        /* 본문 스타일링 */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #A1C4FD, #C2E9FB);
+        }
+
+        /* 폼과 사용자 정보 컨테이너 */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow-y: auto;
+            max-height: 90vh; /* 화면 높이의 90%까지 확장 가능 */
+        }
+
+        /* 헤더 스타일 */
+        h1 {
+            color: #4A90E2;
+            font-size: 24px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* 사용자 정보 스타일 */
+        .user-info p {
+            font-size: 14px;
+            color: #333;
+            margin: 0.5rem 0;
+        }
+
+        /* 라벨 스타일 */
+        label {
+            display: block;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: #333;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* 입력 필드 스타일 */
+        input[type="text"],
+        select {
+            width: 100%; /* 컨테이너 너비에 맞춤 */
+            padding: 12px;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* 입력 필드 포커스 효과 */
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #4A90E2;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+            outline: none;
+        }
+
+        /* 버튼 스타일 */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 1.5rem;
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* 버튼 호버 효과 */
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        /* 출력 필드 스타일 */
+        .output {
+            text-align: left;
+            background-color: #f8f8f8;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            color: #333;
+            max-height: 200px; /* 최대 높이 설정 */
+            overflow-y: auto; /* 스크롤바 추가 */
+        }
+
+        /* 생성된 텍스트 출력 스타일 */
+        #coverLetter {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* 내비게이션 버튼 스타일 */
+        .nav-button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-top: 1.5rem;
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* 내비게이션 버튼 호버 효과 */
+        .nav-button:hover {
+            background-color: #357ABD;
+        }
+    </style>
+    <script>
+        function checkGeneratedIntro() {
+            var generatedIntro = document.getElementById("coverLetter").textContent.trim();
+            if (generatedIntro === "") {
+                alert("자기소개가 생성되지 않았습니다. 먼저 자기소개를 생성해주세요.");
+                return false; // 페이지 이동 방지
+            }
+            return true; // 페이지 이동 허용
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h1>자기소개서 생성 (자기소개)</h1>
+
+    <!-- 로그인한 사용자 정보 표시 -->
+    <div class="user-info">
+        <p>로그인한 사용자: <span th:text="${realname}"></span></p>
+        <p>생년월일: <span th:text="${birthdate}"></span></p>
+    </div>
+
+    <!-- 자기소개서 생성 폼 -->
+    <form action="/generate-intro" method="post">
+        <label>간단한 자기소개:</label>
+        <input type="text" name="intro" required th:value="${intro}"><br>
+
+        <label>어조:</label>
+        <select name="tone" required>
+            <option value="formal" th:selected="${tone == 'formal'}">격식 있는</option>
+            <option value="casual" th:selected="${tone == 'casual'}">가벼운</option>
+            <option value="enthusiastic" th:selected="${tone == 'enthusiastic'}">열정적인</option>
+            <option value="professional" th:selected="${tone == 'professional'}">전문적인</option>
+        </select><br>
+
+        <button type="submit">Generate</button>
+    </form>
+
+    <!-- 생성된 자기소개서 출력 -->
+    <div class="output">
+        <h2>생성된 자기소개</h2>
+        <pre id="coverLetter" th:text="${generatedIntro}"></pre>
+    </div>
+
+    <!-- 자격증 작성 페이지로 이동하는 버튼 -->
+    <a href="/qualifications_page" class="nav-button" onclick="return checkGeneratedIntro()">다음 (자격증 페이지)</a>
+</div>
+<!--
+</form> -->
+</body>
+</html>

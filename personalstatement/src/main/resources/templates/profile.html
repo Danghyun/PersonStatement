@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        /* 본문 스타일 */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #A1C4FD, #C2E9FB);
+        }
+
+        /* 프로필 페이지 컨테이너 */
+        .profile-container {
+            width: 100%;
+            max-width: 700px;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* 제목 스타일 */
+        h1 {
+            color: #4A90E2;
+            font-size: 24px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 20px;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        /* 텍스트 스타일 */
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 0.5rem 0;
+            text-align: left;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            margin-top: 1rem;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #4A90E2;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<div class="profile-container">
+    <h1>프로필 페이지</h1>
+    <h2>내 정보</h2>
+    <p>이름: <span th:text="${user.name}"></span></p>
+    <p>생년월일: <span th:text="${user.birthdate}"></span></p>
+
+    <h2>내가 작성한 자기소개서</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>자기소개서 내용</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="statement : ${statements}">
+            <td th:text="${statement.id}"></td>
+            <td th:text="${statement.generatedStatement}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

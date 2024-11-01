@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        /* Body styling */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #A1C4FD, #C2E9FB);
+        }
+
+        /* Container for the form */
+        .login-container {
+            width: 100%;
+            max-width: 380px;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Header styling */
+        h1 {
+            color: #4A90E2;
+            font-size: 26px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* Label styling */
+        label {
+            display: block;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: #333;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* Input styling */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Focus effect for inputs */
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4A90E2;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+            outline: none;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 1.5rem;
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        /* Additional text and error message */
+        p {
+            margin-top: 1rem;
+            font-size: 14px;
+            color: #555;
+        }
+
+        p.error {
+            color: #E57373;
+            font-weight: bold;
+        }
+
+        /* Link styling */
+        a {
+            color: #4A90E2;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <h1>로그인</h1>
+    <form action="/login" method="post">
+        <label for="username">ID:</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+    <p th:if="${error}" th:text="${error}" class="error"></p>
+    <p>회원이 아니신가요? <a th:href="@{/signup}">회원가입</a></p>
+</div>
+</body>
+</html>

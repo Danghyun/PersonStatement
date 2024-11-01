@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <style>
+        /* 본문 스타일 */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #A1C4FD, #C2E9FB);
+        }
+
+        /* 컨테이너 스타일 */
+        .signup-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* 헤더 스타일 */
+        h1 {
+            color: #4A90E2;
+            font-size: 24px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* 라벨 스타일 */
+        label {
+            display: block;
+            font-weight: 600;
+            margin-top: 1rem;
+            color: #333;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        /* 입력 필드 스타일 */
+        input[type="text"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* 입력 필드 포커스 효과 */
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="date"]:focus {
+            border-color: #4A90E2;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+            outline: none;
+        }
+
+        /* 버튼 스타일 */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 1.5rem;
+            background-color: #4A90E2;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* 버튼 호버 효과 */
+        button:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+<div class="signup-container">
+    <h1>회원가입</h1>
+    <form action="/signup" method="post">
+        <label>ID:</label>
+        <input type="text" name="username" required><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" required><br>
+
+        <label>Name:</label>
+        <input type="text" name="name" required><br>
+
+        <label>Birthdate:</label>
+        <input type="date" name="birthdate" required><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+</body>
+</html>
